@@ -23,7 +23,7 @@ api.interceptors.request.use(
   }
 )
 
-// Add response interceptor to handle token expiration
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
