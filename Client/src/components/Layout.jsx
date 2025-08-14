@@ -30,28 +30,31 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-900 text-gray-100">
       {sidebarOpen && (
         <div 
           className="fixed inset-0 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         >
-          <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
+          <div className="absolute inset-0 bg-gray-700 opacity-70"></div>
         </div>
       )}
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+        fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-          {/* Logo Image */}
-          <img src={Logo} alt="CoinWatch Logo" className="h-28 w-28 object-contain" />
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-700">
+          <div className="flex items-center space-x-2">
+  <img src={Logo} alt="CoinWatch Logo" className="h-12 w-12 object-contain" />
+  <span className="text-xl font-bold text-white">CoinWatch</span>
+</div>
+
           
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-gray-500 hover:text-gray-700"
+            className="lg:hidden text-gray-400 hover:text-gray-200"
           >
             <X className="w-6 h-6" />
           </button>
@@ -70,8 +73,8 @@ const Layout = ({ children }) => {
                   className={`
                     flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors
                     ${isActive 
-                      ? 'bg-primary-100 text-primary-700 border-r-2 border-primary-700' 
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-primary-600 text-white' 
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
                     }
                   `}
                 >
@@ -84,25 +87,25 @@ const Layout = ({ children }) => {
         </nav>
 
         {/* User Info + Logout */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-200">
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-700">
           <div className="relative group">
             {/* User Info */}
-            <div className="flex items-center px-2 py-2 rounded-md hover:bg-gray-100 cursor-pointer">
-              <div className="flex items-center justify-center w-8 h-8 bg-primary-100 rounded-full">
-                <User className="w-4 h-4 text-primary-600" />
+            <div className="flex items-center px-2 py-2 rounded-md hover:bg-gray-700 cursor-pointer">
+              <div className="flex items-center justify-center w-8 h-8 bg-primary-600 rounded-full">
+                <User className="w-4 h-4 text-white" />
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                <p className="text-xs text-gray-500">{user?.email}</p>
+                <p className="text-sm font-medium">{user?.name}</p>
+                <p className="text-xs text-gray-400">{user?.email}</p>
               </div>
             </div>
 
-            {/* Logout button - hidden by default */}
+            {/* Logout button */}
             <button
               onClick={handleLogout}
               className="
-                flex items-center w-full px-4 py-2 mt-2 text-sm text-gray-700 rounded-lg 
-                bg-white shadow-md hover:bg-gray-100 transition-all duration-300
+                flex items-center w-full px-4 py-2 mt-2 text-sm text-gray-300 rounded-lg 
+                bg-gray-800 hover:bg-gray-700 transition-all duration-300
                 opacity-0 scale-95 translate-y-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0
               "
             >
@@ -116,17 +119,17 @@ const Layout = ({ children }) => {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
+        <header className="bg-gray-800 shadow-sm border-b border-gray-700">
           <div className="flex items-center justify-between h-16 px-6">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="text-gray-500 hover:text-gray-700 lg:hidden"
+              className="text-gray-400 hover:text-gray-200 lg:hidden"
             >
               <Menu className="w-6 h-6" />
             </button>
             
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-gray-300">
                 Hii, {user?.name}!
               </span>
             </div>
@@ -134,7 +137,7 @@ const Layout = ({ children }) => {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-900">
           <div className="container mx-auto px-6 py-8">
             {children}
           </div>
@@ -145,4 +148,7 @@ const Layout = ({ children }) => {
 }
 
 export default Layout
+
+
+
 

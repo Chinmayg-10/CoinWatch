@@ -6,10 +6,11 @@ import Layout from './components/Layout'
 import Login from './pages/Login'
 import Register from './pages/Signup'
 import Dashboard from './pages/Dashboard'
-import Expenses from './pages/Expenses'
+import Expense from './pages/Expenses'
 import Analytics from './pages/Analytics'
 import Budget from './pages/Budget'
 import LoadingSpinner from './components/LoadingSpinner'
+import Home from './pages/Home'
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
@@ -19,8 +20,9 @@ const ProtectedRoute = ({ children }) => {
     return <LoadingSpinner />
   }
   
-  return user ? children : <Navigate to="/login" />
+  return user ? children : <Navigate to="/" />
 }
+
 const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth()
   
@@ -35,13 +37,13 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
           <Toaster 
             position="top-right"
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#363636',
+                background: '#1f2937', 
                 color: '#fff',
               },
               success: {
@@ -71,7 +73,15 @@ function App() {
                 </PublicRoute>
               } 
             />
-            
+            <Route 
+              path="/" 
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              } 
+            />
+
             {/* Protected routes */}
             <Route 
               path="/*" 
@@ -80,7 +90,7 @@ function App() {
                   <Layout>
                     <Routes>
                       <Route path="/dashboard" element={<Dashboard />} />
-                      <Route path="/expenses" element={<Expenses />} />
+                      <Route path="/expenses" element={<Expense />} />
                       <Route path="/analytics" element={<Analytics />} />
                       <Route path="/budget" element={<Budget />} />
                       <Route path="/" element={<Navigate to="/dashboard" />} />
